@@ -1,1 +1,3 @@
-print("Welcome to White Ice Analytics")
+## Import Things
+import pandas as pd
+import numpy as np

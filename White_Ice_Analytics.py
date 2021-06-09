@@ -1,1 +1,1 @@
-print("Welcome to White Ice Analytics")
+print("Welcome to White Ice Analytics!")

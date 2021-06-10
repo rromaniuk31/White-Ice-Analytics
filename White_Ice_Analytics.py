@@ -112,7 +112,7 @@ def get_data():
 
 df1918, df1919, df1920, df1921, df1922, df1923, df1924, df1925, df1926, df1927, df1928, df1929, df1930, df1931, df1932, df1933, df1934, df1935, df1936, df1937, df1938, df1939, df1940, df1941, df1942, df1943, df1944, df1945, df1946, df1947, df1948, df1949, df1950, df1951, df1952, df1953, df1954, df1955, df1956, df1957, df1958, df1959, df1960, df1961, df1962, df1963, df1964, df1965, df1966, df1967, df1968, df1969, df1970, df1971, df1972, df1973, df1974, df1975, df1976, df1977, df1978, df1979, df1980, df1981, df1982, df1983, df1984, df1985, df1986, df1987, df1988, df1989, df1990, df1991, df1992, df1993, df1994, df1995, df1996, df1997, df1998, df1999, df2000, df2001, df2002, df2003, df2004, df2006, df2007, df2008, df2009, df2010, df2011, df2012, df2013, df2014, df2015, df2016, df2017, df2018, df2019, df2020, df2021 = get_data()
 df_list = [df1918, df1919, df1920, df1921, df1922, df1923, df1924, df1925, df1926, df1927, df1928, df1929, df1930, df1931, df1932, df1933, df1934, df1935, df1936, df1937, df1938, df1939, df1940, df1941, df1942, df1943, df1944, df1945, df1946, df1947, df1948, df1949, df1950, df1951, df1952, df1953, df1954, df1955, df1956, df1957, df1958, df1959, df1960, df1961, df1962, df1963, df1964, df1965, df1966, df1967, df1968, df1969, df1970, df1971, df1972, df1973, df1974, df1975, df1976, df1977, df1978, df1979, df1980, df1981, df1982, df1983, df1984, df1985, df1986, df1987, df1988, df1989, df1990, df1991, df1992, df1993, df1994, df1995, df1996, df1997, df1998, df1999, df2000, df2001, df2002, df2003, df2004, df2006, df2007, df2008, df2009, df2010, df2011, df2012, df2013, df2014, df2015, df2016, df2017, df2018, df2019, df2020, df2021]
-## Get 2021 Averages
+
 ## Create Actual GP Column (TOI/60)
 for df in df_list:
     df[['Minutes','Seconds']] = df['TOI'].str.split(':', expand = True)
@@ -145,5 +145,22 @@ for df in df_list:
     for i in range(0, len(df)):
         if df['T'][i] == '--':
             df['T'][i] = 0
+
+## Fill blanks with zeros
+for df in df_list:
+    for i in range(0, len(df)):
+        if df['OT'][i] == '--':
+            df['OT'][i] = 0
+
+        if df['SA'][i] == '--':
+            df['SA'][i] = 0
+
+        if df['Svs'][i] == '--':
+            df['Svs'][i] = 0
+
+        if df['Sv%'][i] == '--':
+            df['Sv%'][i] = 0
+
+df1918
 
 num_cols = ['GP', 'GS', 'W', 'L', 'T', 'OT', 'SA', 'Svs', 'GA', 'Sv%', 'GAA', 'TOI', 'SO', 'G', 'A', 'P', 'PIM', 'Actual GP']

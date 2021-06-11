@@ -1,8 +1,11 @@
 ## Import Things
 import pandas as pd
 import numpy as np
+from pandas.api.types import is_numeric_dtype
+from pandas.api.types import is_string_dtype
 
 ## Get Data
+
 def get_data():
     df1918 = pd.read_csv("D:\\White Ice Analytics\\Historical Goalie Stats\\Regular Season\\1918Goalies.csv")
     df1919 = pd.read_csv("D:\\White Ice Analytics\\Historical Goalie Stats\\Regular Season\\1919Goalies.csv")
@@ -113,39 +116,6 @@ def get_data():
 df1918, df1919, df1920, df1921, df1922, df1923, df1924, df1925, df1926, df1927, df1928, df1929, df1930, df1931, df1932, df1933, df1934, df1935, df1936, df1937, df1938, df1939, df1940, df1941, df1942, df1943, df1944, df1945, df1946, df1947, df1948, df1949, df1950, df1951, df1952, df1953, df1954, df1955, df1956, df1957, df1958, df1959, df1960, df1961, df1962, df1963, df1964, df1965, df1966, df1967, df1968, df1969, df1970, df1971, df1972, df1973, df1974, df1975, df1976, df1977, df1978, df1979, df1980, df1981, df1982, df1983, df1984, df1985, df1986, df1987, df1988, df1989, df1990, df1991, df1992, df1993, df1994, df1995, df1996, df1997, df1998, df1999, df2000, df2001, df2002, df2003, df2004, df2006, df2007, df2008, df2009, df2010, df2011, df2012, df2013, df2014, df2015, df2016, df2017, df2018, df2019, df2020, df2021 = get_data()
 df_list = [df1918, df1919, df1920, df1921, df1922, df1923, df1924, df1925, df1926, df1927, df1928, df1929, df1930, df1931, df1932, df1933, df1934, df1935, df1936, df1937, df1938, df1939, df1940, df1941, df1942, df1943, df1944, df1945, df1946, df1947, df1948, df1949, df1950, df1951, df1952, df1953, df1954, df1955, df1956, df1957, df1958, df1959, df1960, df1961, df1962, df1963, df1964, df1965, df1966, df1967, df1968, df1969, df1970, df1971, df1972, df1973, df1974, df1975, df1976, df1977, df1978, df1979, df1980, df1981, df1982, df1983, df1984, df1985, df1986, df1987, df1988, df1989, df1990, df1991, df1992, df1993, df1994, df1995, df1996, df1997, df1998, df1999, df2000, df2001, df2002, df2003, df2004, df2006, df2007, df2008, df2009, df2010, df2011, df2012, df2013, df2014, df2015, df2016, df2017, df2018, df2019, df2020, df2021]
 
-## Create Actual GP Column (TOI/60)
-for df in df_list:
-    df[['Minutes','Seconds']] = df['TOI'].str.split(':', expand = True)
-    df['Actual GP'] = ''
-    for i in range(0, len(df)):
-        if ',' in df['Minutes'][i]:
-            df[['Min1', 'Min2']] = df['Minutes'].str.split(',', expand = True)
-            df['Minutes'][i] = df['Min1'][i] + df['Min2'][i]
-            df = df.drop(columns = ['Min1', 'Min2'])
-
-    df['Minutes'] = pd.to_numeric(df['Minutes'])
-    df['Seconds'] = pd.to_numeric(df['Seconds'])
-    
-    for i in range(0, len(df)):
-        df['TOI'][i] = df['Minutes'][i] + (df['Seconds'][i]/60)
-        df['Actual GP'][i] = df['TOI'][i]/60
-        
-    ## Remove commas from SA & Svs
-    for i in range(0, len(df)):
-        if ',' in df['SA'][i]:
-            df[['SA1', 'SA2']] = df['SA'].str.split(',', expand = True)
-            df['SA'][i] = df['SA1'][i] + df['SA2'][i]
-            df = df.drop(columns = ['SA1', 'SA2'])
-            
-        if ',' in df['Svs'][i]:
-            df[['Svs1', 'Svs2']] = df['Svs'].str.split(',', expand = True)
-            df['Svs'][i] = df['Svs1'][i] + df['Svs2'][i]
-            df = df.drop(columns = ['Svs1', 'Svs2'])
-    ## Change neceesaary columns to numeric
-    for i in range(0, len(df)):
-        if df['T'][i] == '--':
-            df['T'][i] = 0
-
 ## Fill blanks with zeros
 for df in df_list:
     for i in range(0, len(df)):
@@ -161,6 +131,65 @@ for df in df_list:
         if df['Sv%'][i] == '--':
             df['Sv%'][i] = 0
 
-df1918
+## Create Actual GP Column (TOI/60)
+for i in range(0, len(df)):
+    df1918[['Minutes','Seconds','Milli']] = df1918['TOI'].str.split(':', expand = True)
+    df1918['Actual GP'] = ''
+    for i in range(0, len(df1918)):
+        if ',' in df1918['Minutes'][i]:
+            df1918[['Min1', 'Min2']] = df1918['Minutes'].str.split(',', expand = True)
+            df1918['Minutes'][i] = df1918['Min1'][i] + df1918['Min2'][i]
+            df1918 = df1918.drop(columns = ['Min1', 'Min2', 'Milli'])
+
+    df1918['Minutes'] = pd.to_numeric(df1918['Minutes'])
+    df1918['Seconds'] = pd.to_numeric(df1918['Seconds'])
+    
+for i in range(0, len(df1918)):
+    df1918['TOI'][i] = df1918['Minutes'][i] + (df1918['Seconds'][i]/60)
+    df1918['Actual GP'][i] = df1918['TOI'][i]/60
+        
+## Change neceesaary columns to numeric
+for i in range(0, len(df1918)):
+    if df1918['T'][i] == '--':
+        df1918['T'][i] = 0
+
+df_list = df_list[1:]
+for df in df_list:
+    for i in range(0, len(df)):
+        df[['Minutes','Seconds']] = df['TOI'].str.split(':', expand = True)
+        df['Actual GP'] = ''
+        for i in range(0, len(df)):
+            if ',' in df['Minutes'][i]:
+                df[['Min1', 'Min2']] = df['Minutes'].str.split(',', expand = True)
+                df['Minutes'][i] = df['Min1'][i] + df['Min2'][i]
+                df = df.drop(columns = ['Min1', 'Min2'])
+
+        df['Minutes'] = pd.to_numeric(df['Minutes'])
+        df['Seconds'] = pd.to_numeric(df['Seconds'])
+    
+    for i in range(0, len(df)):
+        df['TOI'][i] = df['Minutes'][i] + (df['Seconds'][i]/60)
+        df['Actual GP'][i] = df['TOI'][i]/60
+        
+    ## Remove commas from SA & Svs
+        #if ',' in df['SA']:
+        #    df[['SA1', 'SA2']] = df['SA'].str.split(',', expand = True)
+        #    df['SA'][i] = df['SA1'][i] + df['SA2'][i]
+        #    df = df.drop(columns = ['SA1', 'SA2'])
+
+        #if ',' in df['Svs']: 
+        #    df[['Svs1', 'Svs2']][i] = df['Svs'][i].str.split(',', expand = True)
+        #    df['Svs'][i] = df['Svs1'][i] + df['Svs2'][i]
+        #    df = df.drop(columns = ['Svs1', 'Svs2'])
+    ## Change neceesaary columns to numeric
+    for i in range(0, len(df)):
+        if df['T'][i] == '--':
+            df['T'][i] = 0
 
 num_cols = ['GP', 'GS', 'W', 'L', 'T', 'OT', 'SA', 'Svs', 'GA', 'Sv%', 'GAA', 'TOI', 'SO', 'G', 'A', 'P', 'PIM', 'Actual GP']
+
+for df in df_list:
+    for col in num_cols:
+        pd.to_numeric(df[col])
+
+df1921

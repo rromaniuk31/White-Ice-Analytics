@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="icon" type="image/x-icon" href="assets/puck.ico" />
+        <meta name="google-site-verification" content="B3Ql8nOwmGpwpFp2Rovn98QP4ZR-kW-ti2imwjQQvh0" />
+        <meta name="description" content="White Ice Analytics aims to explore the analytical side of hockey goaltending.  Future analysis will also include NCAA Men's & Women's Basketball" />
+        <meta name="author" content="Raymond Romaniuk" />
+        <meta name="keywords" content="NHL, Analytics, Hockey, Goalie, Goaltending, Statistics, White Ice Analytics, NHL Goalies, NHL Goaltending, NHL Analytics, Goaltending Analytics" />
+        <title>White Ice Analytics</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.html">White Ice Analytics</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Navigation</div>
+                            <a class="nav-link" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Home
+                            </a>
+                            <a class="nav-link" href="tables.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                2021 Adjusted Statistics
+                            </a>
+                            <a class="nav-link" href="charts.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Visualizations
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Welcome to White Ice Analytics</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">White Ice Analytics aims to explore the analytical side of hockey goaltending.  Our analysis aims to supplement the "eye test" when watching goaltenders allowing individuals to create well crafted answers to questions like: "Who's the best goaltender of all-time?", "Which goaltender means the most to their team?" and "Who is the most promising goaltending prospect?". 
+                                <br>
+                                <br>
+                                In the future we plan to perform additional analysis on NCAA Basketball specifically the March Madness Men's and Women's Basketball Tournament's.
+                            </li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-12">
+                                <center>
+                                    <div class="card bg-primary text-white mb-4 medium">
+                                        <div class="card-body medium" font-size: large>825</div>
+                                        <div class="align-items-center col-xl-12">
+                                            <p class="small text-white" text-align: center># of NHL Goaltenders (All-Time)</p>
+                                        </div>
+                                    </div>
+                                </center>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <center>
+                                    <div class="card bg-primary text-white mb-4 medium">
+                                        <div class="card-body medium" font-size: large>2.94</div>
+                                        <div class="align-items-center col-xl-12">
+                                            <p class="small text-white" text-align: center>All-Time NHL GAA</p>
+                                        </div>
+                                    </div>
+                                </center>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <center>
+                                    <div class="card bg-primary text-white mb-4 medium">
+                                        <div class="card-body medium" font-size: large>.900</div>
+                                        <div class="align-items-center col-xl-12">
+                                            <p class="small text-white" text-align: center>All-Time NHL Sv% (1956-Present)</p>
+                                        </div>
+                                    </div>
+                                </center>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <center>
+                                    <div class="card bg-primary text-white mb-4 medium">
+                                        <div class="card-body medium" font-size: large>7016</div>
+                                        <div class="align-items-center col-xl-12">
+                                            <p class="small text-white" text-align: center>All-Time NHL Shutouts</p>
+                                        </div>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Historical GAA (1918-2021)
+                                    </div>
+                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        Historical Sv% (1956-2021)
+                                    </div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4" >
+                                    <div class="card-header">
+                                        <i class="fas fa-table me-1"></i>
+                                        Top 10 2021 Adjusted GAA
+                                    </div>
+                                    <div class="card-body2 column">
+                                        <table id="datatablesSimple" style="width:600px">
+                                            <thead text-align: center>
+                                                <tr>
+                                                  <th>Rank</th>
+                                                  <th>Name</th>
+                                                  <th>Season</th>
+                                                  <th>Team</th>
+                                                  <th>GP</th>
+                                                  <th>Adj. GAA</th>
+                                                  <th>GAA</th>
+                                                  <th>SO</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <td>1</td>
+                                                  <td>Alec Connell</td>
+                                                  <td>1925-1926</td>
+                                                  <td>SEN</td>
+                                                  <td>36</td>
+                                                  <td>1.39</td>
+                                                  <td>1.12</td>
+                                                  <td>15</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>2</td>
+                                                  <td>Bill Durnan</td>
+                                                  <td>1943-1944</td>
+                                                  <td>MTL</td>
+                                                  <td>50</td>
+                                                  <td>1.43</td>
+                                                  <td>2.18</td>
+                                                  <td>2</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>3</td>  
+                                                  <td>Clint Benedict</td>
+                                                  <td>1919-1920</td>
+                                                  <td>SEN</td>
+                                                  <td>24</td>
+                                                  <td>1.47</td>
+                                                  <td>2.66</td>
+                                                  <td>5</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>4</td>  
+                                                  <td>Flat Walsh</td>
+                                                  <td>1928-1929</td>
+                                                  <td>NYA,MMR</td>
+                                                  <td>11</td>
+                                                  <td>1.53</td>
+                                                  <td>0.76</td>
+                                                  <td>4</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>5</td>  
+                                                  <td>George Hainsworth</td>
+                                                  <td>1927-1928</td>
+                                                  <td>MTL</td>
+                                                  <td>44</td>
+                                                  <td>1.60</td>
+                                                  <td>1.06</td>
+                                                  <td>13</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>6</td>  
+                                                  <td>Tony Esposito</td>
+                                                  <td>1971-1972</td>
+                                                  <td>CHI</td>
+                                                  <td>48</td>
+                                                  <td>1.60</td>
+                                                  <td>1.77</td>
+                                                  <td>9</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>7</td>  
+                                                  <td>Bernie Parent</td>
+                                                  <td>1973-1974</td>
+                                                  <td>PHI</td>
+                                                  <td>73</td>
+                                                  <td>1.63</td>
+                                                  <td>1.89</td>
+                                                  <td>12</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>8</td>  
+                                                  <td>Ken Dryden</td>
+                                                  <td>1975-1976</td>
+                                                  <td>MTL</td>
+                                                  <td>62</td>
+                                                  <td>1.63</td>
+                                                  <td>2.03</td>
+                                                  <td>8</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>9</td>  
+                                                  <td>Bernie Parent</td>
+                                                  <td>1974-1975</td>
+                                                  <td>PHI</td>
+                                                  <td>68</td>
+                                                  <td>1.64</td>
+                                                  <td>2.04</td>
+                                                  <td>12</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>10</td>  
+                                                  <td>Jacques Plante</td>
+                                                  <td>1970-1971</td>
+                                                  <td>TOR</td>
+                                                  <td>40</td>
+                                                  <td>1.67</td>
+                                                  <td>1.89</td>
+                                                  <td>4</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table me-1"></i>
+                                        Top 10 2021 Adjusted Sv%
+                                    </div>
+                                    <div class="card-body2 column">
+                                        <table id="datatablesSimple2" style="width:600px; float: left">
+                                            <thead text-align: center>
+                                                <tr>
+                                                  <th>Rank</th>
+                                                  <th>Name</th>
+                                                  <th>Season</th>
+                                                  <th>Team</th>
+                                                  <th>GP</th>
+                                                  <th>Adj. Sv%</th>
+                                                  <th>Sv%</th>
+                                                  <th>SO</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <td>1</td>
+                                                  <td>Jacques Plante</td>
+                                                  <td>1970-1971</td>
+                                                  <td>TOR</td>
+                                                  <td>40</td>
+                                                  <td>0.949</td>
+                                                  <td>0.944</td>
+                                                  <td>4</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>2</td>
+                                                  <td>Glenn Resch</td>
+                                                  <td>1975-1976</td>
+                                                  <td>NYI</td>
+                                                  <td>44</td>
+                                                  <td>0.947</td>
+                                                  <td>0.928</td>
+                                                  <td>7</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>3</td>  
+                                                  <td>Denis Herron</td>
+                                                  <td>1981-1982</td>
+                                                  <td>MTL</td>
+                                                  <td>27</td>
+                                                  <td>0.947</td>
+                                                  <td>0.911</td>
+                                                  <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>4</td>  
+                                                  <td>Ken Dryden</td>
+                                                  <td>1975-1976</td>
+                                                  <td>MTL</td>
+                                                  <td>62</td>
+                                                  <td>0.946</td>
+                                                  <td>0.927</td>
+                                                  <td>8</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>5</td>  
+                                                  <td>Rick St. Croix</td>
+                                                  <td>1980-1981</td>
+                                                  <td>PHI</td>
+                                                  <td>27</td>
+                                                  <td>0.946</td>
+                                                  <td>0.913</td>
+                                                  <td>2</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>6</td>  
+                                                  <td>Rogie Vachon</td>
+                                                  <td>1974-1975</td>
+                                                  <td>LAK</td>
+                                                  <td>54</td>
+                                                  <td>0.945</td>
+                                                  <td>0.927</td>
+                                                  <td>6</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>7</td>  
+                                                  <td>Bernie Parent</td>
+                                                  <td>1973-1974</td>
+                                                  <td>PHI</td>
+                                                  <td>73</td>
+                                                  <td>0.944</td>
+                                                  <td>0.932</td>
+                                                  <td>12</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>8</td>  
+                                                  <td>Bob Froese</td>
+                                                  <td>1985-1986</td>
+                                                  <td>PHI</td>
+                                                  <td>51</td>
+                                                  <td>0.944</td>
+                                                  <td>0.909</td>
+                                                  <td>5</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>9</td>  
+                                                  <td>Roland Melanson</td>
+                                                  <td>1982-1983</td>
+                                                  <td>NYI</td>
+                                                  <td>44</td>
+                                                  <td>0.943</td>
+                                                  <td>0.909</td>
+                                                  <td>1</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>10</td>  
+                                                  <td>Dominik Hasek</td>
+                                                  <td>1993-1994</td>
+                                                  <td>BUF</td>
+                                                  <td>58</td>
+                                                  <td>0.943</td>
+                                                  <td>0.930</td>
+                                                  <td>7</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; White Ice Analytics 2021</div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+    </body>
+</html>
